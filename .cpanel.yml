@@ -1,0 +1,16 @@
+ ```yaml
+    ---
+    deployment:
+      tasks:
+        # Masuk ke virtual environment Node.js yang sudah kita buat
+        - export DEPLOYPATH=/home/gembiral/iven.gembiraloka.com/home
+        - export REPOPATH=/home/gembiral/iven.gembiraloka.com/home
+        - source /home/gembiral/iven.gembiraloka.com/home/18/bin/activate && cd $REPOPATH
+        
+        # Install dependencies dan build aplikasi React
+        - npm install
+        - npm run build
+        
+        # Bersihkan folder tujuan dan salin hasil build ke sana
+        - rm -rf $DEPLOYPATH*
+        - /bin/cp -R dist/* $DEPLOYPATH
